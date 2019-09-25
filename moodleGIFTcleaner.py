@@ -1,4 +1,5 @@
 """
+moodleGIFTcleaner.py
 Processes all text files in a specified folder to
 clean all of the extra gunk Moodle adds to exported
 GIFT format exam questions
@@ -8,7 +9,7 @@ import os
 import re
 import time
 
-#TODO: add an example file to the main directory
+# TODO: add an example file to the main directory
 
 # I save my exam questions in a different folder which is ignored by Git.
 # If you want, you can do the same, or you can comment out the following
@@ -19,45 +20,46 @@ os.chdir(os.getcwd() + "/ExamQuestions")
 
 FILES = os.listdir(os.getcwd())
 
-def filecleaning(dirtyfile):
-
+def file_cleaning(dirty_file):
     """Searches through the file using regex to find the gunk"""
 
-    openedfile = open(dirtyfile)
-    contents = openedfile.read()
-    openedfile.close()
+    opened_file = open(dirty_file)
+    contents = opened_file.read()
+    opened_file.close()
 
-    categoryRegex = re.compile(r'\$.*\n')
-    newcontents = categoryRegex.sub('', contents)
+    category_regex = re.compile(r'\$.*\n')
+    new_contents = category_regex.sub('', contents)
 
-    titlesRegex = re.compile(r'\:\:.*\:\:')
-    newcontents = titlesRegex.sub('', newcontents)
+    titles_regex = re.compile(r'\:\:.*\:\:')
+    new_contents = titles_regex.sub('', new_contents)
 
-    moodleInfoRegex = re.compile(r'\/\/.*\n')
-    newcontents = moodleInfoRegex.sub('', newcontents)
+    moodle_info_regex = re.compile(r'\/\/.*\n')
+    new_contents = moodle_info_regex.sub('', new_contents)
 
-    htmlRegex = re.compile(r'<.*?>')
-    newcontents = htmlRegex.sub('', newcontents)
+    html_regex = re.compile(r'<.*?>')
+    new_contents = html_regex.sub('', new_contents)
 
-    bracketRegex = re.compile(r'\[.*\]')
-    newcontents = bracketRegex.sub('', newcontents)
+    bracket_regex = re.compile(r'\[.*\]')
+    new_contents = bracket_regex.sub('', new_contents)
 
-    openedfile = open(dirtyfile.strip(".txt")+"_cleaned.txt", 'w')
-    openedfile.write(newcontents)
-    openedfile.close()
+    opened_file = open(dirty_file.strip(".txt")+"_cleaned.txt", 'w')
+    opened_file.write(new_contents)
+    opened_file.close()
 
-    openyesno = input("Would you like to open this cleaned file? (y/n)")
-    if openyesno =="y":
-        os.startfile(dirtyfile.strip(".txt")+"_cleaned.txt")
+    open_yes_no = input("Would you like to open this cleaned file? (y/n)")
+    if open_yes_no == "y":
+        os.startfile(dirty_file.strip(".txt")+"_cleaned.txt")
+
 
 for file in FILES:
     if not file.endswith('.txt') or 'cleaned' in file:
         continue
     while True:
-        yesno = input("Is "+file+" a GIFT-formatted text file you would like cleaned? (y/n)")
+        yesno = input(
+            "Is "+file+" a GIFT-formatted text file you would like cleaned? (y/n)")
         if yesno == "y":
             print(" \nProcessing...\n")
-            filecleaning(file)
+            file_cleaning(file)
             time.sleep(0.2)
             break
         elif yesno == "n":
@@ -67,6 +69,3 @@ for file in FILES:
             time.sleep(0.2)
 
 print("Process Complete.")
-
-
-

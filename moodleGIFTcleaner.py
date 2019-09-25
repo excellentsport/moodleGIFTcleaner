@@ -8,17 +8,9 @@ GIFT format exam questions
 import os
 import re
 import time
+import argparse
 
-# TODO: add an example file to the main directory
-
-# I save my exam questions in a different folder which is ignored by Git.
-# If you want, you can do the same, or you can comment out the following
-# line of code to search for text files in the same directory as removemoodleformatting.py
-os.chdir(os.getcwd() + "/ExamQuestions")
 # TODO: add ability to add CL arguments for directory
-
-
-FILES = os.listdir(os.getcwd())
 
 def file_cleaning(dirty_file):
     """Searches through the file using regex to find the gunk"""
@@ -49,6 +41,10 @@ def file_cleaning(dirty_file):
     open_yes_no = input("Would you like to open this cleaned file? (y/n)")
     if open_yes_no == "y":
         os.startfile(dirty_file.strip(".txt")+"_cleaned.txt")
+
+
+
+FILES = os.listdir(os.getcwd())
 
 
 for file in FILES:

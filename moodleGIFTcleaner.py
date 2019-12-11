@@ -11,6 +11,7 @@ import time
 import argparse
 
 # TODO: add ability to add CL arguments for directory
+# TODO: add parsing of individual questions before cleaning
 
 def file_cleaning(dirty_file):
     """Searches through the file using regex to find the gunk"""

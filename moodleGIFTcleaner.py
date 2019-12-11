@@ -24,10 +24,13 @@ def file_cleaning(dirty_file):
     new_contents = category_regex.sub('', contents)
 
     titles_regex = re.compile(r'\:\:.*\:\:')
-    new_contents = titles_regex.sub('', new_contents)
+    new_contents = titles_regex.sub('::question::\n', new_contents)
 
     moodle_info_regex = re.compile(r'\/\/.*\n')
     new_contents = moodle_info_regex.sub('', new_contents)
+
+    brace_regex = re.compile(r'(.)\{')
+    new_contents = brace_regex.sub(r'\1\n{', new_contents)
 
     html_regex = re.compile(r'<.*?>')
     new_contents = html_regex.sub('', new_contents)

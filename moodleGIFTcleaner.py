@@ -2,7 +2,8 @@
 moodleGIFTcleaner.py
 Processes all text files in a specified folder to
 clean all of the extra gunk Moodle adds to exported
-GIFT format exam questions
+GIFT format exam questions. Needs to be run in the same
+folder as the files you want processed.
 """
 
 import os

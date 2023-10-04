@@ -17,7 +17,7 @@ import argparse
 def file_cleaning(dirty_file):
     """Searches through the file using regex to find the gunk"""
 
-    opened_file = open(dirty_file)
+    opened_file = open(dirty_file, encoding="utf-8")
     contents = opened_file.read()
     opened_file.close()
 
